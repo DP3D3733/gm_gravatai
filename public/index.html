@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CalebePMT - GM Gravataía</title>
+    <title>PMT - GM Gravataí</title>
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -1373,8 +1373,6 @@
                 data_inicial = new Date(partes_inicial[0], partes_inicial[1] - 1, partes_inicial[2]);
                 partes_final = document.querySelector('#minhas_missoes_data_final').value.split("-");
                 data_final = new Date(partes_final[0], partes_final[1] - 1, partes_final[2]);
-
-                console.log(`${document.querySelector('#minhas_missoes_data_inicial').value}-()-${document.querySelector('#minhas_missoes_data_final').value}-()-${document.querySelector('#minhas_missoes_select_area').value}`);
 
                 if (data_inicial == '' || data_final == '' || 0 <= data_final - data_inicial >= 3) {
                     return;
