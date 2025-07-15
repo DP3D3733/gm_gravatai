@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Rotinas / Chamadas</title>
+    <title>PMT - GM Gravataí</title>
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -104,8 +104,8 @@
 
         /* Filtros */
         #filtro,
-        #filtro_chamadas,
-        #resumo_chamadas,
+        #filtro_areas,
+        #resumo_areas,
         #filtro_setores {
             background: #fff;
             padding: 10px;
@@ -114,7 +114,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        #resumo_chamadas table {
+        #resumo_areas table {
             width: 100%;
             table-layout: fixed;
             /* 👈 força as colunas a se distribuírem igualmente */
@@ -123,24 +123,24 @@
         }
 
         #filtro table td,
-        #filtro_chamadas table td,
-        #resumo_chamadas table td,
+        #filtro_areas table td,
+        #resumo_areas table td,
         #filtro_setores table td {
             padding: 10px;
         }
 
 
         #filtro input[type="date"],
-        #filtro_chamadas input[type="date"],
+        #filtro_areas input[type="date"],
         #filtro button,
-        #filtro_chamadas button {
+        #filtro_areas button {
             padding: 6px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
 
         #filtro button,
-        #filtro_chamadas button {
+        #filtro_areas button {
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.2s, color 0.32;
@@ -148,7 +148,7 @@
         }
 
         #filtro button:hover,
-        #filtro_chamadas button:hover {
+        #filtro_areas button:hover {
             background-color: #ffffff;
         }
 
@@ -156,9 +156,9 @@
             margin-right: 5px;
         }
 
-        /* Tabela de rotinas */
-        #rotinas_table,
-        #chamadas_table,
+        /* Tabela de minhas_missoes */
+        #minhas_missoes_table,
+        #areas_table,
         #setores_table,
         #usuários_table {
             width: 100%;
@@ -186,31 +186,31 @@
             background-color: #666;
         }
 
-        body:not(.dark-mode) #rotinas_table,
-        body:not(.dark-mode) #chamadas_table,
+        body:not(.dark-mode) #minhas_missoes_table,
+        body:not(.dark-mode) #areas_table,
         body:not(.dark-mode) #setores_table,
         body:not(.dark-mode) #usuários_table {
             background: white;
         }
 
-        body:not(.dark-mode) #rotinas_table tr:nth-child(even),
-        body:not(.dark-mode) #chamadas_table tr:nth-child(even),
+        body:not(.dark-mode) #minhas_missoes_table tr:nth-child(even),
+        body:not(.dark-mode) #areas_table tr:nth-child(even),
         body:not(.dark-mode) #setores_table tr:nth-child(even),
         body:not(.dark-mode) #usuários_table tr:nth-child(even) {
             background-color: #fffafa;
         }
 
-        body:not(.dark-mode) #rotinas_table tr:hover,
-        body:not(.dark-mode) #chamadas_table tr:hover,
+        body:not(.dark-mode) #minhas_missoes_table tr:hover,
+        body:not(.dark-mode) #areas_table tr:hover,
         body:not(.dark-mode) #setores_table tr:hover,
         body:not(.dark-mode) #usuários_table tr:hover {
             background-color: #eceaea;
         }
 
-        #rotinas_table th,
-        #rotinas_table td,
-        #chamadas_table th,
-        #chamadas_table td,
+        #minhas_missoes_table th,
+        #minhas_missoes_table td,
+        #areas_table th,
+        #areas_table td,
         #setores_table th,
         #setores_table td,
         #usuários_table th,
@@ -220,8 +220,8 @@
             text-align: left;
         }
 
-        body:not(.dark-mode) #rotinas_table th,
-        body:not(.dark-mode) #chamadas_table th,
+        body:not(.dark-mode) #minhas_missoes_table th,
+        body:not(.dark-mode) #areas_table th,
         body:not(.dark-mode) #setores_table th,
         body:not(.dark-mode) #usuários_table th {
             position: sticky;
@@ -234,8 +234,8 @@
 
         }
 
-        body.dark-mode #rotinas_table th,
-        body.dark-mode #chamadas_table th,
+        body.dark-mode #minhas_missoes_table th,
+        body.dark-mode #areas_table th,
         body.dark-mode #setores_table th,
         body.dark-mode #usuários_table th {
             position: sticky;
@@ -247,8 +247,8 @@
 
         }
 
-        body:not(.dark-mode) #rotinas_table td[contenteditable="true"]:focus,
-        body:not(.dark-mode) #chamadas_table td[contenteditable="true"]:focus,
+        body:not(.dark-mode) #minhas_missoes_table td[contenteditable="true"]:focus,
+        body:not(.dark-mode) #areas_table td[contenteditable="true"]:focus,
         body:not(.dark-mode) #setores_table td[contenteditable="true"]:focus,
         body:not(.dark-mode) #usuários_table td[contenteditable="true"]:focus {
             background-color: #ffffcc;
@@ -518,24 +518,24 @@
 
         /* Filtros */
         body.dark-mode #filtro,
-        body.dark-mode #filtro_chamadas,
-        body.dark-mode #resumo_chamadas,
+        body.dark-mode #filtro_areas,
+        body.dark-mode #resumo_areas,
         body.dark-mode #filtro_setores {
             background: #2c2c2c;
             box-shadow: none;
         }
 
         body.dark-mode #filtro input[type="date"],
-        body.dark-mode #filtro_chamadas input[type="date"],
+        body.dark-mode #filtro_areas input[type="date"],
         body.dark-mode #filtro button,
-        body.dark-mode #filtro_chamadas button {
+        body.dark-mode #filtro_areas button {
             background-color: #1e1e1e;
             color: #fff;
             border: 1px solid #555;
         }
 
         body.dark-mode #filtro button:hover,
-        body.dark-mode #filtro_chamadas button:hover {
+        body.dark-mode #filtro_areas button:hover {
             background-color: #333;
         }
 
@@ -727,7 +727,7 @@
 <body>
     <div id="login">
         <div class="login-container">
-            <h2>Rotinas</h2>
+            <h2>PMT - Planilha de Missão de Turno</h2>
             <span id="tela_aviso"></span>
             <div class="form-group">
                 <label for="usuario">Usuário</label>
@@ -764,14 +764,14 @@
         <div onclick="logout()" id="logout">X</div>
         <div id="toggle-dark-mode">🌙</div>
         <div class="tabs">
-            <button class="tab-button ativo" onclick="selecionarAba(this)">Rotinas</button>
-            <button class="tab-button" onclick="selecionarAba(this)">Chamadas</button>
-            <button class="tab-button" onclick="selecionarAba(this)">Setores</button>
-            <button style="display: none;" id="aba_usuários" class="tab-button"
-                onclick="selecionarAba(this)">Usuários</button>
+            <button class="tab-button ativo" onclick="selecionarAba(this)">Minhas Missões</button>
+            <button class="tab-button" style="display: none;" onclick="selecionarAba(this)">Áreas</button>
+            <button class="tab-button" style="display: none;" onclick="selecionarAba(this)">Setores</button>
+            <button class="tab-button" style="display: none;" onclick="selecionarAba(this)">Usuários</button>
+
         </div>
         <br><br>
-        <div id="rotinas">
+        <div id="minhas_missoes">
             <div id="filtro">
                 <table>
                     <tbody>
@@ -780,39 +780,23 @@
                                 <button onclick="turno_atual(this)">Turno Atual</button>
                             </td>
                             <td>
-                                <input oninput="filtrar_dados('rotinas')" type="date" name="rotina_data_inicial"
-                                    id="rotina_data_inicial">
+                                <input oninput="filtrar_dados('minhas_missoes')" type="date"
+                                    name="minhas_missoes_data_inicial" id="minhas_missoes_data_inicial">
                             </td>
                             <td>
-                                <input oninput="filtrar_dados('rotinas')" type="date" name="rotina_data_final"
-                                    id="rotina_data_final">
+                                <input oninput="filtrar_dados('minhas_missoes')" type="date"
+                                    name="minhas_missoes_data_final" id="minhas_missoes_data_final">
                             </td>
                             <td>
-                                <input oninput="filtrar_dados('rotinas')" type="checkbox" name="rotina_checkbox_norte"
-                                    id="rotina_checkbox_norte">
-                                <label for="rotina_checkbox_norte">NORTE</label>
-                            </td>
-                            <td>
-                                <input oninput="filtrar_dados('rotinas')" type="checkbox" name="rotina_checkbox_sul"
-                                    id="rotina_checkbox_sul">
-                                <label for="rotina_checkbox_sul">SUL</label>
-                            </td>
-                            <td>
-                                <input oninput="filtrar_dados('rotinas')" type="checkbox" name="rotina_checkbox_centro"
-                                    id="rotina_checkbox_centro">
-                                <label for="rotina_checkbox_centro">CENTRO</label>
-                            </td>
-                            <td>
-                                <input oninput="filtrar_dados('rotinas')" type="checkbox"
-                                    name="rotina_checkbox_especializadas" id="rotina_checkbox_especializadas">
-                                <label for="rotina_checkbox_especializadas">OUTRAS</label>
+                                <select onchange="filtrar_dados('minhas_missoes')" name="minhas_missoes_select_area"
+                                    id="minhas_missoes_select_area"></select>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="div_tabela_registros">
-                <table id="rotinas_table">
+                <table id="minhas_missoes_table">
                     <thead>
                         <tr>
                             <th class="no-sort">
@@ -839,12 +823,14 @@
                                     </svg>
                                 </span>
                             </th>
-                            <th class="sortable">QRA</th>
-                            <th class="sortable">QRU</th>
-                            <th class="sortable">QTH</th>
+                            <th class="sortable">DATA-HORA INICIAL</th>
+                            <th class="sortable">DATA-HORA FINAL</th>
+                            <th class="sortable">ÁREA</th>
                             <th class="sortable">ENDEREÇO</th>
-                            <th class="sortable">QTR INICIAL</th>
-                            <th class="sortable">QTR FINAL</th>
+                            <th class="sortable">AÇÃO</th>
+                            <th class="sortable">CAUSA</th>
+                            <th class="sortable">EXECUÇÃO</th>
+                            <th class="sortable">JUSTIFICATIVA</th>
                             <th class="sortable">OBS</th>
                         </tr>
                     </thead>
@@ -874,6 +860,14 @@
                                     </svg>
                                 </span>
                             </td>
+                            <td oninput="filterOptions(this,2)" onfocus="horario_final(this)" contenteditable="true"
+                                onblur="enviar_dados(this)">
+
+                            </td>
+                            <td oninput="filterOptions(this,2)" onfocus="horario_final(this)" contenteditable="true"
+                                onblur="enviar_dados(this)">
+
+                            </td>
 
                             <td oninput="filterOptions(this,0)" onblur="enviar_dados(this),hideOptions(event, this)"
                                 contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
@@ -883,108 +877,44 @@
                                 contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
 
                             </td>
-                            <td oninput="filterOptions(this,2)" onblur="enviar_dados(this),hideOptions(event, this)"
-                                contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
-                            <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="true"
-                                onblur="enviar_dados(this)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
+
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div id="chamadas" style="display: none;">
-            <div id="filtro_chamadas">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <button onclick="turno_atual(this)">Turno Atual</button>
-                            </td>
-                            <td>
-                                <input oninput="filtrar_dados('chamadas')" type="date" name="chamadas_data_inicial"
-                                    id="chamadas_data_inicial">
-                            </td>
-                            <td>
-                                <input oninput="filtrar_dados('chamadas')" type="date" name="chamadas_data_final"
-                                    id="chamadas_data_final">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="resumo_chamadas">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Denúncias 153</th>
-                            <th>Denúncias WhatsApp</th>
-                            <th>Total de Ligações</th>
-                            <th>Apoio ao Samu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div id="areas" style="display: none;">
             <div class="div_tabela_registros">
-                <table id="chamadas_table">
+                <table id="areas_table">
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="sortable">NOME</th>
-                            <th class="sortable">TELEFONE</th>
-                            <th class="sortable">NARRATIVA</th>
-                            <th class="sortable">NATUREZA</th>
-                            <th class="sortable">ENDEREÇO</th>
-                            <th class="sortable">ATENDENTE</th>
                             <th class="sortable">ÁREA</th>
-                            <th class="sortable">MEIO</th>
-                            <th class="sortable">QTR</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="width: 10px;">
+                            <td style="width: 10px; white-space: nowrap;">
                                 <span class="icon-wrapper" style="display: inline-flex; gap: 4px; align-items: center;">
-                                    <svg class="copiar" onclick="copiar_dados(this,false)"
-                                        xmlns="http://www.w3.org/2000/svg" height="18px" width="18px"
-                                        viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                                    </svg>
-
-                                    <svg class="empenhar" onclick="empenhar_gu(this)" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px"
-                                        viewBox="0 0 20 20" version="1.1">
-                                        <g id="surface1">
-                                            <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;"
-                                                d="M 4.765625 1.308594 C 4.167969 1.441406 3.535156 1.882812 3.210938 2.394531 C 3.003906 2.71875 2.96875 2.832031 2.1875 5.4375 L 1.511719 7.691406 L 1.253906 7.839844 C 0.738281 8.136719 0.289062 8.699219 0.105469 9.277344 C 0.0195312 9.550781 0.0195312 9.5625 0.0195312 12.441406 L 0.0195312 15.332031 L 0.109375 15.507812 C 0.15625 15.605469 0.246094 15.75 0.308594 15.824219 C 0.453125 15.996094 0.820312 16.195312 1.0625 16.230469 L 1.242188 16.257812 L 1.257812 17.046875 C 1.269531 17.761719 1.277344 17.847656 1.359375 18.007812 C 1.496094 18.285156 1.652344 18.453125 1.921875 18.597656 L 2.167969 18.730469 L 4.082031 18.730469 L 4.328125 18.597656 C 4.601562 18.449219 4.71875 18.328125 4.875 18.03125 C 4.976562 17.835938 4.980469 17.808594 4.992188 17.039062 L 5.007812 16.25 L 15 16.25 L 15 16.96875 C 15 17.523438 15.015625 17.730469 15.0625 17.882812 C 15.160156 18.179688 15.371094 18.429688 15.664062 18.589844 L 15.917969 18.730469 L 17.832031 18.730469 L 18.078125 18.597656 C 18.351562 18.449219 18.46875 18.328125 18.625 18.03125 C 18.726562 17.835938 18.730469 17.808594 18.742188 17.046875 L 18.757812 16.257812 L 18.9375 16.230469 C 19.167969 16.195312 19.542969 16 19.671875 15.847656 C 19.726562 15.785156 19.816406 15.640625 19.875 15.53125 L 19.980469 15.332031 L 19.980469 12.441406 C 19.980469 9.5625 19.980469 9.550781 19.894531 9.277344 C 19.710938 8.699219 19.261719 8.136719 18.746094 7.839844 L 18.488281 7.691406 L 17.8125 5.4375 C 17.441406 4.199219 17.09375 3.058594 17.039062 2.910156 C 16.785156 2.191406 16.222656 1.640625 15.484375 1.378906 L 15.175781 1.269531 L 10.097656 1.261719 C 5.859375 1.257812 4.976562 1.265625 4.765625 1.308594 Z M 15.257812 5.625 C 15.566406 6.644531 15.816406 7.484375 15.820312 7.488281 C 15.820312 7.496094 13.199219 7.5 9.996094 7.5 C 5.199219 7.5 4.175781 7.492188 4.191406 7.449219 C 4.203125 7.421875 4.453125 6.589844 4.746094 5.601562 C 5.042969 4.617188 5.292969 3.796875 5.300781 3.777344 C 5.308594 3.761719 7.429688 3.753906 10.007812 3.757812 L 14.699219 3.769531 Z M 5.511719 10.738281 C 5.78125 10.867188 5.949219 11.027344 6.097656 11.296875 C 6.21875 11.523438 6.230469 11.570312 6.230469 11.875 C 6.230469 12.179688 6.21875 12.226562 6.097656 12.453125 C 5.949219 12.726562 5.824219 12.84375 5.53125 13 C 5.363281 13.085938 5.28125 13.101562 5 13.101562 C 4.695312 13.105469 4.648438 13.09375 4.421875 12.972656 C 4.152344 12.828125 3.996094 12.660156 3.859375 12.382812 C 3.734375 12.125 3.738281 11.617188 3.867188 11.347656 C 4.03125 11.011719 4.347656 10.753906 4.707031 10.660156 C 4.898438 10.609375 5.324219 10.652344 5.511719 10.738281 Z M 15.511719 10.738281 C 15.78125 10.867188 15.949219 11.027344 16.097656 11.296875 C 16.21875 11.523438 16.230469 11.570312 16.230469 11.875 C 16.230469 12.179688 16.21875 12.226562 16.097656 12.453125 C 15.949219 12.726562 15.824219 12.84375 15.53125 13 C 15.363281 13.085938 15.28125 13.101562 15 13.101562 C 14.695312 13.105469 14.648438 13.09375 14.421875 12.972656 C 14.152344 12.828125 13.996094 12.660156 13.859375 12.382812 C 13.734375 12.125 13.738281 11.617188 13.867188 11.347656 C 14.03125 11.011719 14.347656 10.753906 14.707031 10.660156 C 14.898438 10.609375 15.324219 10.652344 15.511719 10.738281 Z M 15.511719 10.738281 " />
-                                        </g>
-                                    </svg>
                                     <svg class="borracha" onclick="excluir_linha(this,false)"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         width="17px" height="17px" viewBox="0 0 15 15" version="1.1">
-                                        <g id="surface1">
+                                        <g>
                                             <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;"
                                                 d="M 3.28125 12.65625 L 14.0625 12.65625 L 14.0625 13.59375 L 3.28125 13.59375 Z M 3.28125 12.65625 " />
                                             <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;"
@@ -992,42 +922,8 @@
                                         </g>
                                     </svg>
                                 </span>
-
-
-
-
                             </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
-
-                            </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
-
-                            </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
-
-                            </td>
-                            <td oninput="filterOptions(this,4)" onblur="enviar_dados(this),hideOptions(event, this)"
-                                contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
-
-                            </td>
-                            <td oninput="filterOptions(this,2)" onblur="enviar_dados(this),hideOptions(event, this)"
-                                contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
-
-                            </td>
-                            <td oninput="filterOptions(this,5)" onblur="enviar_dados(this),hideOptions(event, this)"
-                                contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
-
-                            </td>
-                            <td oninput="filterOptions(this,6)" onblur="enviar_dados(this),hideOptions(event, this)"
-                                contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
-
-                            </td>
-                            <td oninput="filterOptions(this,7)" onblur="enviar_dados(this),hideOptions(event, this)"
-                                contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
-
-                            </td>
-                            <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="true"
-                                onblur="enviar_dados(this)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
                         </tr>
@@ -1043,7 +939,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input oninput="filtrar_dados('setores')" type="text" placeholder="QTH..."
+                                <input oninput="filtrar_dados('setores')" type="text" placeholder="Local..."
                                     name="setores_qth" id="setores_qth">
                             </td>
                             <td>
@@ -1054,14 +950,6 @@
                                 <input oninput="filtrar_dados('setores')" type="text" placeholder="Tipo de Local..."
                                     name="setores_tipo_local" id="setores_tipo_local">
                             </td>
-                            <td>
-                                <input oninput="filtrar_dados('setores')" type="text" placeholder="Natureza Inicial..."
-                                    name="setores_natureza" id="setores_natureza">
-                            </td>
-                            <td>
-                                <input oninput="filtrar_dados('setores')" type="text" placeholder="Narrativa..."
-                                    name="setores_narrativa" id="setores_narrativa">
-                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -1071,11 +959,9 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="sortable">QTH</th>
+                            <th class="sortable">LOCAL</th>
                             <th class="sortable">ENDEREÇO</th>
                             <th class="sortable">TIPO DE LOCAL</th>
-                            <th class="sortable">NATUREZA INICIAL</th>
-                            <th class="sortable">NARRATIVA</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1094,21 +980,14 @@
                                     </svg>
                                 </span>
                             </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
+                            <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
-                            <td oninput="filterOptions(this,8)" onblur="enviar_dados(this),hideOptions(event, this)"
+                            <td oninput="filterOptions(this,3)" onblur="enviar_dados(this),hideOptions(event, this)"
                                 contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
-
-                            </td>
-                            <td oninput="filterOptions(this,4)" onblur="enviar_dados(this),hideOptions(event, this)"
-                                contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
-
-                            </td>
-                            <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
 
                             </td>
                         </tr>
@@ -1124,8 +1003,9 @@
                     <tr>
                         <th></th>
                         <th class="sortable">Usuário</th>
-                        <th class="sortable">Número Nome</th>
+                        <th class="sortable">Nome Funcional</th>
                         <th class="sortable">Credencial</th>
+                        <th class="sortable">Área</th>
                         <th>Senha</th>
                     </tr>
                 </thead>
@@ -1141,10 +1021,10 @@
                                         d="M 12.835938 4.925781 L 9.117188 1.214844 C 8.941406 1.039062 8.703125 0.9375 8.453125 0.9375 C 8.207031 0.9375 7.964844 1.039062 7.789062 1.214844 L 1.226562 7.777344 C 1.050781 7.953125 0.953125 8.191406 0.953125 8.441406 C 0.953125 8.6875 1.050781 8.925781 1.226562 9.101562 L 3.34375 11.25 L 7.835938 11.25 L 12.835938 6.253906 C 13.011719 6.078125 13.109375 5.839844 13.109375 5.589844 C 13.109375 5.339844 13.011719 5.101562 12.835938 4.925781 Z M 7.449219 10.3125 L 3.75 10.3125 L 1.875 8.4375 L 4.832031 5.480469 L 8.550781 9.191406 Z M 9.210938 8.550781 L 5.5 4.832031 L 8.4375 1.875 L 12.1875 5.59375 Z M 9.210938 8.550781 " />
                                 </g>
                             </svg></td>
-                        <td contenteditable="true" oninput="filterOptions(this,3)" onblur="enviar_dados(this)"></td>
-                        <td contenteditable="true" oninput="filterOptions(this,3)" onblur="enviar_dados(this)"></td>
-                        <td contenteditable="true" oninput="filterOptions(this,3)" onblur="enviar_dados(this)"></td>
-                        <td contenteditable="true" oninput="filterOptions(this,3)" onblur="enviar_dados(this)"></td>
+                        <td contenteditable="true" oninput="filterOptions(this,2)" onblur="enviar_dados(this)"></td>
+                        <td contenteditable="true" oninput="filterOptions(this,2)" onblur="enviar_dados(this)"></td>
+                        <td contenteditable="true" oninput="filterOptions(this,2)" onblur="enviar_dados(this)"></td>
+                        <td contenteditable="true" oninput="filterOptions(this,0)" onblur="enviar_dados(this)"></td>
                     </tr>
                 </tbody>
             </table>
@@ -1156,12 +1036,12 @@
     <script>
         // Configuração Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyBag5uPzTK0sXx3nBzjGhmlmSCySO3u3_U",
-            authDomain: "rotinas-8498d.firebaseapp.com",
-            projectId: "rotinas-8498d",
-            storageBucket: "rotinas-8498d.firebasestorage.app",
-            messagingSenderId: "1053551077085",
-            appId: "1:1053551077085:web:4b2dcbbeb60f9f7fee1d34"
+            apiKey: "AIzaSyAqY7aEjFYzpLnj_Wr7FeSJKZ-cqpGvWa4",
+            authDomain: "pmt-gm-gravatai.firebaseapp.com",
+            projectId: "pmt-gm-gravatai",
+            storageBucket: "pmt-gm-gravatai.firebasestorage.app",
+            messagingSenderId: "838987238541",
+            appId: "1:838987238541:web:aeb78ebaecd60f143a66c4"
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
@@ -1208,7 +1088,7 @@
                         document.querySelector('#programa').style.display = '';
                         document.querySelector('#login').style.display = 'none';
                         sessionStorage.setItem('usuario_logado', JSON.stringify(dados));
-                        document.querySelectorAll("#rotinas_table tbody tr,#chamadas_table tbody tr,#setores_table tbody tr").forEach(tr => {
+                        document.querySelectorAll("#minhas_missoes_table tbody tr,#areas_table tbody tr,#setores_table tbody tr").forEach(tr => {
                             tr.setAttribute('name', JSON.parse(sessionStorage.getItem('usuario_logado')).nome + '-**-' + new Date().getTime());
                         });
                     }
@@ -1298,7 +1178,7 @@
                             const lin = document.querySelector(`#setores_table tr[name='${celulas[0]}']`);
                             if (lin) {
 
-                                if (lin.querySelectorAll('td')[1].innerText.trim().replaceAll('  ', ' ') != celulas[1].trim().replaceAll('  ', ' ') || lin.querySelectorAll('td')[2].innerText.trim().replaceAll('  ', ' ') != celulas[4].trim().replaceAll('  ', ' ') || lin.querySelectorAll('td')[3].innerText.trim().replaceAll('  ', ' ') != celulas[2].trim().replaceAll('  ', ' ') || lin.querySelectorAll('td')[4].innerText.trim().replaceAll('  ', ' ') != celulas[5].trim().replaceAll('  ', ' ') || lin.querySelectorAll('td')[5].innerText.trim().replaceAll('  ', ' ') != celulas[3].trim().replaceAll('  ', ' ')) {
+                                if (lin.querySelectorAll('td')[1].innerText.trim().replaceAll('  ', ' ') != celulas[1].trim().replaceAll('  ', ' ') || lin.querySelectorAll('td')[2].innerText.trim().replaceAll('  ', ' ') != celulas[2].trim().replaceAll('  ', ' ') || lin.querySelectorAll('td')[3].innerText.trim().replaceAll('  ', ' ') != celulas[3].trim().replaceAll('  ', ' ')) {
                                     document.querySelector(`#setores_table tr[name='${celulas[0]}']`).outerHTML = l;
                                 }
                             } else {
@@ -1306,6 +1186,26 @@
                             }
                         })
                         document.querySelector('#setores_table tbody').insertAdjacentHTML('afterbegin', linhas);
+                    } else if (doc.data().area) {
+                        document.querySelectorAll('#areas_table tbody tr').forEach(linha => {
+                            if (!doc.data().area.includes(linha.querySelectorAll('td')[1].innerText) && linha.querySelectorAll('td')[1].innerText != '') {
+                                linha.remove();
+                            }
+                        });
+                        let linhas = '';
+                        doc.data().area.split('-').forEach(area => {
+                            if (!area) return;
+                            const l = criar_linha('áreas', ['', area]);
+                            const lin = Array.from(document.querySelectorAll('#areas_table td')).filter(td => td.innerText.includes(area))[0];
+                            if (lin) {
+                                if (lin.querySelectorAll('td')[1].innerText.trim().replaceAll('  ', ' ') != celulas[1].trim().replaceAll('  ', ' ')) {
+                                    lin.outerHTML = l;
+                                }
+                            } else {
+                                linhas += l;
+                            }
+                        })
+                        document.querySelector('#areas_table tbody').insertAdjacentHTML('afterbegin', linhas);
                     }
 
                 });
@@ -1322,7 +1222,7 @@
                         let linhas = '';
                         querySnapshot.forEach((doc) => {
                             const dados = doc.data();
-                            const celulas = [doc.id, dados.nome, dados.credencial, dados.senha];
+                            const celulas = [doc.id, dados.nome, dados.credencial, dados.areas, dados.senha];
                             linhas += criar_linha('usuários', celulas);
                         });
                         document.querySelector('#usuários tbody').insertAdjacentHTML('afterbegin', linhas);
@@ -1352,9 +1252,9 @@
                         </svg>`;
                 content_editable = true;
             }
-            if (aba == 'rotinas') {
+            if (aba == 'minhas missões') {
                 linha = `<tr name="${dados[0]}" >
-                <td style="width: 10px;" dados='${dados[1]}-()-${dados[2]}-()-${dados[3]}-()-${dados[4]}-()-${dados[5]}-()-_QRA_-()-_QTR_INICIAL_-()-_QRU_-()-_QTR_FINAL_-()-${dados[10]}-()-${dados[11]}' >
+                <td style="width: 10px;">
                     <span class="icon-wrapper" style="display: inline-flex; gap: 4px; align-items: center;">
                         <label class="checkbox-wrapper">
                                 <input type="checkbox" class="custom-checkbox">
@@ -1367,90 +1267,49 @@
                         ${borracha}
                     </span>
                 </td>
-                <td oninput="filterOptions(this,0)"  onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}" onkeydown="teclas_atalho(this,event.key)">
-                    ${dados[6]}
-                </td>
-                <td oninput="filterOptions(this,1)"  onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                    onkeydown="teclas_atalho(this,event.key)">
-                    ${dados[8]}
-                </td>
-                <td oninput="filterOptions(this,2)"  onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                    onkeydown="teclas_atalho(this,event.key)">
+                <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="true" onblur="enviar_dados(this)">
                     ${dados[1]}
                 </td>
-                <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
+                <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="true" onblur="enviar_dados(this)">
+                    ${dados[2]}
+                </td>
+                <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="true" onblur="enviar_dados(this)">
+                    ${dados[3]}
+                </td>
+                <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="true" onblur="enviar_dados(this)">
                     ${dados[4]}
                 </td>
-                <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
+
+                <td oninput="filterOptions(this,0)" onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
+                    ${dados[5]}
+                </td>
+                <td oninput="filterOptions(this,1)" onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="true" onkeydown="teclas_atalho(this,event.key)">
+                    ${dados[6]}
+                </td>
+                <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
                     ${dados[7]}
                 </td>
-                <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
+                <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
+                    ${dados[8]}
+                </td>
+                <td oninput="filterOptions(this,2)" contenteditable="true" onblur="enviar_dados(this)">
                     ${dados[9]}
                 </td>
-                <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
-                    ${dados[12] || ''}
-                </td>
             </tr>`;
-            } else if (aba == 'chamadas') {
 
-                linha = `<tr name="${dados[0]}">
+
+
+
+            } else if (aba == 'áreas') {
+
+                linha = `<tr>
                     <td style="width: 10px;">
                         <span class="icon-wrapper" style="display: inline-flex; gap: 4px; align-items: center;">
-                            <svg class="${copiado}" onclick="copiar_dados(this,false)" xmlns="http://www.w3.org/2000/svg" height="18px"
-                                width="18px" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                            </svg>
-
-                            <svg class="empenhar" onclick="empenhar_gu(this)" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px"
-                                viewBox="0 0 20 20" version="1.1">
-                                <g id="surface1">
-                                    <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;"
-                                        d="M 4.765625 1.308594 C 4.167969 1.441406 3.535156 1.882812 3.210938 2.394531 C 3.003906 2.71875 2.96875 2.832031 2.1875 5.4375 L 1.511719 7.691406 L 1.253906 7.839844 C 0.738281 8.136719 0.289062 8.699219 0.105469 9.277344 C 0.0195312 9.550781 0.0195312 9.5625 0.0195312 12.441406 L 0.0195312 15.332031 L 0.109375 15.507812 C 0.15625 15.605469 0.246094 15.75 0.308594 15.824219 C 0.453125 15.996094 0.820312 16.195312 1.0625 16.230469 L 1.242188 16.257812 L 1.257812 17.046875 C 1.269531 17.761719 1.277344 17.847656 1.359375 18.007812 C 1.496094 18.285156 1.652344 18.453125 1.921875 18.597656 L 2.167969 18.730469 L 4.082031 18.730469 L 4.328125 18.597656 C 4.601562 18.449219 4.71875 18.328125 4.875 18.03125 C 4.976562 17.835938 4.980469 17.808594 4.992188 17.039062 L 5.007812 16.25 L 15 16.25 L 15 16.96875 C 15 17.523438 15.015625 17.730469 15.0625 17.882812 C 15.160156 18.179688 15.371094 18.429688 15.664062 18.589844 L 15.917969 18.730469 L 17.832031 18.730469 L 18.078125 18.597656 C 18.351562 18.449219 18.46875 18.328125 18.625 18.03125 C 18.726562 17.835938 18.730469 17.808594 18.742188 17.046875 L 18.757812 16.257812 L 18.9375 16.230469 C 19.167969 16.195312 19.542969 16 19.671875 15.847656 C 19.726562 15.785156 19.816406 15.640625 19.875 15.53125 L 19.980469 15.332031 L 19.980469 12.441406 C 19.980469 9.5625 19.980469 9.550781 19.894531 9.277344 C 19.710938 8.699219 19.261719 8.136719 18.746094 7.839844 L 18.488281 7.691406 L 17.8125 5.4375 C 17.441406 4.199219 17.09375 3.058594 17.039062 2.910156 C 16.785156 2.191406 16.222656 1.640625 15.484375 1.378906 L 15.175781 1.269531 L 10.097656 1.261719 C 5.859375 1.257812 4.976562 1.265625 4.765625 1.308594 Z M 15.257812 5.625 C 15.566406 6.644531 15.816406 7.484375 15.820312 7.488281 C 15.820312 7.496094 13.199219 7.5 9.996094 7.5 C 5.199219 7.5 4.175781 7.492188 4.191406 7.449219 C 4.203125 7.421875 4.453125 6.589844 4.746094 5.601562 C 5.042969 4.617188 5.292969 3.796875 5.300781 3.777344 C 5.308594 3.761719 7.429688 3.753906 10.007812 3.757812 L 14.699219 3.769531 Z M 5.511719 10.738281 C 5.78125 10.867188 5.949219 11.027344 6.097656 11.296875 C 6.21875 11.523438 6.230469 11.570312 6.230469 11.875 C 6.230469 12.179688 6.21875 12.226562 6.097656 12.453125 C 5.949219 12.726562 5.824219 12.84375 5.53125 13 C 5.363281 13.085938 5.28125 13.101562 5 13.101562 C 4.695312 13.105469 4.648438 13.09375 4.421875 12.972656 C 4.152344 12.828125 3.996094 12.660156 3.859375 12.382812 C 3.734375 12.125 3.738281 11.617188 3.867188 11.347656 C 4.03125 11.011719 4.347656 10.753906 4.707031 10.660156 C 4.898438 10.609375 5.324219 10.652344 5.511719 10.738281 Z M 15.511719 10.738281 C 15.78125 10.867188 15.949219 11.027344 16.097656 11.296875 C 16.21875 11.523438 16.230469 11.570312 16.230469 11.875 C 16.230469 12.179688 16.21875 12.226562 16.097656 12.453125 C 15.949219 12.726562 15.824219 12.84375 15.53125 13 C 15.363281 13.085938 15.28125 13.101562 15 13.101562 C 14.695312 13.105469 14.648438 13.09375 14.421875 12.972656 C 14.152344 12.828125 13.996094 12.660156 13.859375 12.382812 C 13.734375 12.125 13.738281 11.617188 13.867188 11.347656 C 14.03125 11.011719 14.347656 10.753906 14.707031 10.660156 C 14.898438 10.609375 15.324219 10.652344 15.511719 10.738281 Z M 15.511719 10.738281 " />
-                                </g>
-                            </svg>
                             ${borracha}
                         </span>
                     </td>
-                    <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
+                    <td oninput="filterOptions(this,3)" contenteditable="true" onblur="enviar_dados(this)">
                         ${dados[1]}
-                    </td>
-                    <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
-                        ${dados[2]}
-                    </td>
-                    <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
-                        ${dados[3]}
-                    </td>
-                    <td oninput="filterOptions(this,4)" 
-                        onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                        onkeydown="teclas_atalho(this,event.key)">
-                        ${dados[4]}
-                    </td>
-                   <td oninput="filterOptions(this,2)" 
-                        onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                        onkeydown="teclas_atalho(this,event.key)">
-                        ${dados[5]}
-                    </td>
-                    <td oninput="filterOptions(this,5)" 
-                        onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                        onkeydown="teclas_atalho(this,event.key)">
-                        ${dados[6]}
-                    </td>
-                    <td oninput="filterOptions(this,6)" 
-                        onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                        onkeydown="teclas_atalho(this,event.key)">
-                        ${dados[7]}
-                    </td>
-                    <td oninput="filterOptions(this,7)" 
-                        onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                        onkeydown="teclas_atalho(this,event.key)">
-                        ${dados[8]}
-                    </td>
-                    <td oninput="filterOptions(this,3)" onfocus="horario_final(this)" contenteditable="${content_editable}"
-                        onblur="enviar_dados(this)">
-                        ${dados[9]}
                     </td>
                 </tr>`
             } else if (aba == 'setores') {
@@ -1464,20 +1323,12 @@
                         ${dados[1]}
                     </td>
                     <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
-                        ${dados[4]}
+                        ${dados[2]}
                     </td>
                     <td oninput="filterOptions(this,8)" 
                         onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
                         onkeydown="teclas_atalho(this,event.key)">
-                        ${dados[2]}
-                    </td>
-                    <td oninput="filterOptions(this,4)" 
-                        onblur="enviar_dados(this),hideOptions(event, this)" contenteditable="${content_editable}"
-                        onkeydown="teclas_atalho(this,event.key)">
-                        ${dados[5]}
-                    </td>
-                    <td oninput="filterOptions(this,3)" contenteditable="${content_editable}" onblur="enviar_dados(this)">
-                        ${dados[3] || ''}
+                        ${dados[3]}
                     </td>
                 </tr>`;
             } else if (aba == 'usuários') {
@@ -1497,38 +1348,42 @@
                         ${dados[2]}
                     </td>
                     <td oninput="filterOptions(this,3)" onblur="enviar_dados(this)" contenteditable="${content_editable}">
-                        ${dados[3].substring(0, 4)}
+                        ${dados[3]}
                     </td>
+                    <td oninput="filterOptions(this,3)" onblur="enviar_dados(this)" contenteditable="${content_editable}">
+                        ${dados[4].substring(0, 4)}
+                    </td>
+                    
                 </tr>`;
             }
             return linha;
         }
-        let unsubscribeRotinasList = [];
-        let unsubscribeChamadasList = [];
+        let unsubscribeminhas_missoesList = [];
+        let unsubscribeareasList = [];
         function filtrar_dados(aba) {
-            let partes_inicial, data_inicial, partes_final, cad_norte, cad_sul, cad_centro, cad_especializadas, th;
+            let partes_inicial, data_inicial, partes_final, th;
 
-            if (aba == 'rotinas') {
-                let l_rotinas = document.querySelectorAll('#rotinas_table tbody tr');
-                for (let index = 0; index < l_rotinas.length - 1; index++) {
-                    l_rotinas[index].remove();
+            if (aba == 'minhas_missoes') {
+                let l_minhas_missoes = document.querySelectorAll('#minhas_missoes_table tbody tr');
+                for (let index = 0; index < l_minhas_missoes.length - 1; index++) {
+                    l_minhas_missoes[index].remove();
 
                 }
-                partes_inicial = document.querySelector('#rotina_data_inicial').value.split("-");
+                partes_inicial = document.querySelector('#minhas_missoes_data_inicial').value.split("-");
                 data_inicial = new Date(partes_inicial[0], partes_inicial[1] - 1, partes_inicial[2]);
-                partes_final = document.querySelector('#rotina_data_final').value.split("-");
+                partes_final = document.querySelector('#minhas_missoes_data_final').value.split("-");
                 data_final = new Date(partes_final[0], partes_final[1] - 1, partes_final[2]);
-                cad_norte = document.querySelector('#rotina_checkbox_norte');
-                cad_sul = document.querySelector('#rotina_checkbox_sul');
-                cad_centro = document.querySelector('#rotina_checkbox_centro');
-                cad_especializadas = document.querySelector('#rotina_checkbox_especializadas');
-                if (data_inicial == '' || data_final == '' || 0 <= data_final - data_inicial >= 3 || (cad_norte.checked == false && cad_sul.checked == false && cad_centro.checked == false && cad_especializadas.checked == false)) {
+
+                console.log(`${document.querySelector('#minhas_missoes_data_inicial').value}-()-${document.querySelector('#minhas_missoes_data_final').value}-()-${document.querySelector('#minhas_missoes_select_area').value}`);
+
+                if (data_inicial == '' || data_final == '' || 0 <= data_final - data_inicial >= 3) {
                     return;
                 }
-                localStorage.setItem('filtro_rotinas', `${document.querySelector('#rotina_data_inicial').value}-()-${document.querySelector('#rotina_data_final').value}-()-${cad_norte.checked}-()-${cad_sul.checked}-()-${cad_centro.checked}-()-${cad_especializadas.checked}`);
 
-                unsubscribeRotinasList.forEach(unsub => unsub());
-                unsubscribeRotinasList = [];
+                localStorage.setItem('filtro_minhas_missoes', `${document.querySelector('#minhas_missoes_data_inicial').value}-()-${document.querySelector('#minhas_missoes_data_final').value}-()-${document.querySelector('#minhas_missoes_select_area').value}`);
+
+                unsubscribeminhas_missoesList.forEach(unsub => unsub());
+                unsubscribeminhas_missoesList = [];
                 // lista de unsubscribers
 
                 // Suponha que você já tenha: data_inicial e data_final
@@ -1536,11 +1391,11 @@
                 while (current <= data_final) {
                     const dataStr = current.toISOString();
 
-                    const unsub = db.collection('rotinas').doc(dataStr).onSnapshot(doc => {
+                    const unsub = db.collection('minhas_missoes').doc(dataStr).onSnapshot(doc => {
                         if (!doc.exists) { return };
                         const dados = doc.data();
                         let linhas = '';
-                        document.querySelectorAll('#rotinas_table tbody tr').forEach(linha => {
+                        document.querySelectorAll('#minhas_missoes_table tbody tr').forEach(linha => {
                             let data_linha = new Date(linha.querySelectorAll('td')[5].innerText.split('/')[2]?.split(',')[0], linha.querySelectorAll('td')[5].innerText.split('/')[1] - 1, linha.querySelectorAll('td')[5].innerText.split('/')[0]);
                             if (!isNaN(data_linha.getTime())) {
                                 data_linha = data_linha.toISOString();
@@ -1549,26 +1404,41 @@
                                 linha.remove();
                             }
                         });
+                        const area = document.querySelector('#minhas_missoes_select_area').value;
+                        if (area == 'Todas') {
+                            Object.values(dados).forEach(dado => {
+                                if (dado != '') {
+                                    dado.split('-++-').forEach(linha => {
+                                        if (!linha) return;
+                                        const celulas = linha.split('-()-');
 
-                        const setores = ['norte', 'sul', 'centro', 'especializadas'];
-                        setores.forEach(setor => {
-                            const checkbox = document.querySelector(`#rotina_checkbox_${setor}`);
-                            if (checkbox?.checked && dados[setor]) {
-                                dados[setor].split('-++-').forEach(linha => {
+                                        const l = criar_linha('minhas missões', celulas);
+                                        if (document.querySelector(`#minhas_missoes_table tr[name='${celulas[0]}']`)) {
+                                            document.querySelector(`#minhas_missoes_table tr[name='${celulas[0]}']`).outerHTML = l;
+                                        } else {
+                                            linhas += l;
+                                        }
+                                    });
+                                }
+                            }
+                            );
+                        } else {
+                            if (dados[area]) {
+                                dados[area].split('-++-').forEach(linha => {
                                     if (!linha) return;
                                     const celulas = linha.split('-()-');
-                                    const l = criar_linha('rotinas', celulas);
-                                    if (document.querySelector(`#rotinas_table tr[name='${celulas[0]}']`)) {
-                                        document.querySelector(`#rotinas_table tr[name='${celulas[0]}']`).outerHTML = l;
+                                    const l = criar_linha('minhas missões', celulas);
+                                    if (document.querySelector(`#minhas_missoes_table tr[name='${celulas[0]}']`)) {
+                                        document.querySelector(`#minhas_missoes_table tr[name='${celulas[0]}']`).outerHTML = l;
                                     } else {
                                         linhas += l;
                                     }
                                 });
                             }
-                        });
+                        }
 
-                        document.querySelector('#rotinas_table tbody').insertAdjacentHTML('afterbegin', linhas);
-                        th = document.querySelector('#rotinas_table th[asc],#rotinas_table th[desc]');
+                        document.querySelector('#minhas_missoes_table tbody').insertAdjacentHTML('afterbegin', linhas);
+                        th = document.querySelector('#minhas_missoes_table th[asc],#minhas_missoes_table th[desc]');
                         if (th) {
                             const index = Array.from(th.closest('thead').querySelectorAll('th')).indexOf(th);
                             let lin_tab = Array.from(th.closest('table').querySelectorAll('tbody tr')).map((l) => l.querySelectorAll('td')[index].innerText + '-&&-' + l.outerHTML);
@@ -1586,113 +1456,12 @@
                         }
                     });
 
-                    unsubscribeRotinasList.push(unsub); // salvar função para limpar depois
+                    unsubscribeminhas_missoesList.push(unsub); // salvar função para limpar depois
                     current.setDate(current.getDate() + 1);
                 }
 
 
-            } else if (aba == 'chamadas') {
-                let l_chamadas = document.querySelectorAll('#chamadas_table tbody tr');
-                for (let index = 0; index < l_chamadas.length - 1; index++) {
-                    l_chamadas[index].remove();
 
-                }
-                partes_inicial = document.querySelector('#chamadas_data_inicial').value.split("-");
-                data_inicial = new Date(partes_inicial[0], partes_inicial[1] - 1, partes_inicial[2]);
-                partes_final = document.querySelector('#chamadas_data_final').value.split("-");
-                data_final = new Date(partes_final[0], partes_final[1] - 1, partes_final[2]);
-                if (data_inicial == '' || data_final == '' || 0 <= data_final - data_inicial >= 3) {
-                    return;
-                }
-                localStorage.setItem('filtro_chamadas', `${document.querySelector('#chamadas_data_inicial').value}-()-${document.querySelector('#chamadas_data_final').value}`);
-
-                unsubscribeChamadasList.forEach(unsub => unsub());
-                unsubscribeChamadasList = [];
-                // lista de unsubscribers
-
-                // Suponha que você já tenha: data_inicial e data_final
-                let current = new Date(data_inicial);
-
-                while (current <= data_final) {
-                    const dataStr = current.toISOString();
-
-                    const unsub = db.collection('chamadas').doc(dataStr).onSnapshot(doc => {
-                        if (!doc.exists) { return };
-                        const dados = doc.data();
-
-                        let linhas = '';
-                        document.querySelectorAll('#chamadas_table tbody tr').forEach(linha => {
-                            let data_linha = new Date(linha.querySelectorAll('td')[9].innerText.split('/')[2]?.split(',')[0], linha.querySelectorAll('td')[9].innerText.split('/')[1] - 1, linha.querySelectorAll('td')[9].innerText.split('/')[0]);
-                            if (!isNaN(data_linha.getTime())) {
-                                data_linha = data_linha.toISOString();
-                            }
-                            if (!JSON.stringify(dados).includes(linha.getAttribute('name')) && linha.querySelectorAll('td')[9].innerText !== '' && dataStr == data_linha) {
-                                linha.remove();
-                            }
-                        });
-
-                        dados.chamadas.split('-++-').forEach(linha => {
-                            if (!linha) return;
-                            const celulas = linha.split('-()-');
-                            const l = criar_linha('chamadas', celulas);
-                            if (document.querySelector(`#chamadas_table tr[name='${celulas[0]}']`)) {
-                                document.querySelector(`#chamadas_table tr[name='${celulas[0]}']`).outerHTML = l;
-                            } else {
-                                linhas += l;
-                            }
-                        });
-
-                        document.querySelector('#chamadas_table tbody').insertAdjacentHTML('afterbegin', linhas);
-                        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-                        th = document.querySelector('#chamadas_table th[asc],#chamadas_table th[desc]');
-                        if (th) {
-                            const index = Array.from(th.closest('thead').querySelectorAll('th')).indexOf(th);
-                            let lin_tab = Array.from(th.closest('table').querySelectorAll('tbody tr')).map((l) => l.querySelectorAll('td')[index].innerText + '-&&-' + l.outerHTML);
-                            lin_tab.pop();
-                            if (th.getAttribute('asc')) {
-                                lin_tab.sort().reverse();
-                            } else {
-                                lin_tab.sort();
-                            }
-                            th.closest('table').querySelector('tbody').innerHTML = th.closest('table').querySelector('tbody tr:last-child').outerHTML;
-                            lin_tab = lin_tab.map((l) => l.split('-&&-')[1]).forEach(l => {
-                                th.closest('table').querySelector('tbody tr:last-child').insertAdjacentHTML('beforebegin', l);
-                            });
-                            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-                        }
-                        const resumo_chamadas = document.querySelectorAll('#resumo_chamadas tbody td');
-                        let denuncias_153 = 0;
-                        let denuncias_wats = 0;
-                        let total_ligacoes = 0;
-                        let apoio_ao_samu = 0;
-
-                        document.querySelectorAll('#chamadas_table tbody tr').forEach(tr => {
-                            let celulas = tr.querySelectorAll('td');
-                            if ((celulas[8].innerText.includes('153') || celulas[8].innerText.includes('156')) && !celulas[8].innerText.includes('WhatsApp')) {
-                                denuncias_153++;
-                                total_ligacoes++;
-                            }
-                            if (celulas[8].innerText.includes('WhatsApp 153')) {
-                                denuncias_wats++;
-                            }
-                            if (celulas[8].innerText.includes('5161')) {
-                                total_ligacoes++;
-                            }
-                            if (celulas[4].innerText.toLowerCase().includes('samu')) {
-                                apoio_ao_samu++;
-                            }
-                            resumo_chamadas[0].innerText = denuncias_153;
-                            resumo_chamadas[1].innerText = denuncias_wats;
-                            resumo_chamadas[2].innerText = total_ligacoes;
-                            resumo_chamadas[3].innerText = apoio_ao_samu;
-
-                        })
-
-                    });
-
-                    unsubscribeChamadasList.push(unsub); // salvar função para limpar depois
-                    current.setDate(current.getDate() + 1);
-                }
             } else if (aba == 'setores') {
                 const filtros = Array.from(document.querySelectorAll('#filtro_setores input'));
                 const linhas = document.querySelectorAll('#setores_table tbody tr');
@@ -1800,9 +1569,6 @@
             if (celulas_vazias == 'sim' && td.parentNode.parentNode.querySelectorAll('tr').length > 1 && td.parentNode != td.parentNode.parentNode.querySelectorAll('tr')[td.parentNode.parentNode.querySelectorAll('tr').length - 1]) {
                 td.parentNode.remove();
             }
-            if (td == td.parentNode.querySelectorAll('td')[3] && optionsList.style.display == "none") {
-                td.parentNode.nextElementSibling?.querySelectorAll('td')[1]?.focus();
-            }
         }
 
         function filterOptions(td, list) {
@@ -1819,7 +1585,7 @@
             celulas.forEach(function (cel) {
                 if (cel.innerText != '' && vazia == 'nao') {
                     if (aba != 'usuários') {
-                        document.querySelector(`#${document.querySelector('button[class="tab-button ativo"]').innerText.toLowerCase()}_table tbody`).insertAdjacentHTML('beforeend', criar_linha(aba, [JSON.parse(sessionStorage.getItem('usuario_logado')).nome + '-**-' + new Date().getTime(), '', '', '', '', '', '', '', '', '', '', '']));
+                        document.querySelector(`#${document.querySelector('button[class="tab-button ativo"]').innerText.toLowerCase().replaceAll(' ', '_').replaceAll('õ', 'o').replaceAll('á', 'a')}_table tbody`).insertAdjacentHTML('beforeend', criar_linha(aba, [JSON.parse(sessionStorage.getItem('usuario_logado')).nome + '-**-' + new Date().getTime(), '', '', '', '', '', '', '', '', '', '', '']));
                     } else {
                         document.querySelector(`#${document.querySelector('button[class="tab-button ativo"]').innerText.toLowerCase()}_table tbody`).insertAdjacentHTML('beforeend', criar_linha(aba, ['', '', '', '', '']));
                     }
@@ -1836,7 +1602,7 @@
 
             const text = td.innerText.trim().toLowerCase();
 
-            if (td == td.parentNode.querySelectorAll('td')[4] && aba == 'Rotinas') {
+            if (td == td.parentNode.querySelectorAll('td')[4] && aba == 'minhas missoes') {
                 let dados = td.parentNode.querySelectorAll('td')[0].getAttribute('dados').split('-()-');
                 dados[3] = td.innerText.trim();
                 td.parentNode.querySelectorAll('td')[0].setAttribute('dados', dados.join('-()-'));
@@ -1849,31 +1615,15 @@
         function updateOptions(td, filter, list) {
             let options = [];
             if (list == 0) {
-                JSON.parse(localStorage.getItem('gus')).gus.split('-').forEach(function (item) {
-                    options.push(item + ' - Dia');
-                    options.push(item + ' - Noite');
-                });
+                options = JSON.parse(localStorage.getItem('area')).area.split('-').sort();
             } else if (list == 1) {
-                options = JSON.parse(localStorage.getItem('qru')).qru.split('-').sort();
-            } else if (list == 2) {
                 JSON.parse(localStorage.getItem('qth')).qth.split('-++-').forEach(function (item) {
                     if (item != '' && item.split('-()-')[1].replaceAll('"', '').trim() != '') {
-                        options.push(item.split('-()-')[1].replaceAll('"', '').trim());
-                        if (item.split('-()-')[1].replaceAll('"', '').trim().toLowerCase() == filter && document.querySelector('button[class="tab-button ativo"]').innerText == 'Rotinas') {
-                            td.nextElementSibling.innerText = item.split('-()-')[4].replaceAll('"', '').trim();
-                            td.parentNode.querySelector('td').setAttribute('dados', item.replace(item.substring(0, item.indexOf('-()-') + 4), '').replaceAll('"', '').trim());
-                        }
+                        options.push(item.split('-()-')[1].replaceAll('"', '').trim() + ' - ' + item.split('-()-')[2].replaceAll('"', '').trim() + ' - ' + item.split('-()-')[3].replaceAll('"', '').trim());
+
                     }
                 });
-            } else if (list == 4) {
-                options = JSON.parse(localStorage.getItem('naturezas')).naturezas.split('-').sort();
-            } else if (list == 5) {
-                options = JSON.parse(localStorage.getItem('gms')).gms.split('-').sort();
-            } else if (list == 6) {
-                options = JSON.parse(localStorage.getItem('area')).area.split('-').sort();
-            } else if (list == 7) {
-                options = JSON.parse(localStorage.getItem('meio')).meio.split('-').sort();
-            } else if (list == 8) {
+            } else if (list == 3) {
                 options = JSON.parse(localStorage.getItem('tipo')).tipo.split('-').sort();
             }
             options = options.sort();
@@ -1912,7 +1662,7 @@
             const celulas = celula.closest('tr').querySelectorAll('td');
             let texto = '';
             const aba = document.querySelector('button[class="tab-button ativo"]').innerText;
-            if (aba == 'Rotinas' && celulas[0].getAttribute('dados')) {
+            if (aba == 'minhas_missoes' && celulas[0].getAttribute('dados')) {
                 if (celulas[0].getAttribute('dados').includes('-()-_QRA_-()-_QTR_INICIAL_-()-_QRU_-()-_QTR_FINAL_-()-')) {
                     let qth = celulas[0].getAttribute('dados').split('-()-')[0];
                     let qth_certo = qth.replace('DEM ', '');
@@ -1926,7 +1676,7 @@
                 if (!texto.includes('-++-')) {
                     texto += `-++-`;
                 }
-            } else if (aba == 'Chamadas') {
+            } else if (aba == 'areas') {
                 let qth_endereco = celulas[5].innerText;
                 if (localStorage.getItem('qth')?.includes(qth_endereco)) {
                     let qth = JSON.parse(localStorage.getItem('qth')).qth;
@@ -2021,8 +1771,8 @@ ${samu}`
         }
 
         function selecionarAba(botao) {
-            document.querySelector('#rotinas').style.display = 'none';
-            document.querySelector('#chamadas').style.display = 'none';
+            document.querySelector('#minhas_missoes').style.display = 'none';
+            document.querySelector('#areas').style.display = 'none';
             document.querySelector('#setores').style.display = 'none';
             document.querySelector('#usuários').style.display = 'none';
 
@@ -2030,10 +1780,10 @@ ${samu}`
                 btn.classList.remove('ativo');
             });
             botao.classList.add('ativo');
-            if (botao.innerText == 'Rotinas') {
-                document.querySelector('#rotinas').style.display = 'block';
-            } else if (botao.innerText == 'Chamadas') {
-                document.querySelector('#chamadas').style.display = 'block';
+            if (botao.innerText == 'Minhas Missões') {
+                document.querySelector('#minhas_missoes').style.display = 'block';
+            } else if (botao.innerText == 'Áreas') {
+                document.querySelector('#areas').style.display = 'block';
             } else if (botao.innerText == 'Setores') {
                 document.querySelector('#setores').style.display = 'block';
             } else if (botao.innerText == 'Usuários') {
@@ -2054,29 +1804,12 @@ ${samu}`
                 minute: '2-digit',
                 hour12: false, // usa o formato 24h
             });
-            if (document.querySelector('button[class="tab-button ativo"]').innerText == 'Rotinas' &&
-                celulas[1].innerText != '' &&
-                celulas[2].innerText != '' &&
-                celulas[5].innerText == '' &&
-                (celulas[3].innerText != '' || celulas[4].innerText != '')
-            ) {
-                // Preenche a célula 5 com a hora atual
-                const hora = new Date().toLocaleString('pt-BR', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false, // usa o formato 24h
-                });
-                celulas[5].innerText = hora;
-            }
 
-            if (aba == 'Rotinas' && (celulas[1].innerText == '' || celulas[2].innerText == '')) {
+            if (aba == 'Minhas Missões' && (celulas[1].innerText == '' || celulas[2].innerText == '' || celulas[3].innerText == '' || celulas[4].innerText == '' || celulas[5].innerText == '' || celulas[6].innerText == '' || celulas[7].innerText == '' || celulas[8].innerText == '')) {
                 return;
-            } else if (aba == 'Chamadas' && (celulas[1].innerText == '' || celulas[3].innerText == '' || celulas[4].innerText == '' || celulas[5].innerText == '' || celulas[6].innerText == '' || celulas[7].innerText == '' || celulas[8].innerText == '' || celulas[9].innerText == '')) {
+            } else if (aba == 'Áreas' && celulas[1].innerText == '') {
                 return;
-            } else if (aba == 'Setores' && (celulas[1].innerText == '' || celulas[2].innerText == '' || celulas[3].innerText == '' || celulas[4].innerText == '')) {
+            } else if (aba == 'Setores' && (celulas[1].innerText == '' || celulas[2].innerText == '' || celulas[3].innerText == '')) {
                 return;
             } else if (aba == 'Usuários' && (celulas[1].innerText == '' || celulas[2].innerText == '' || celulas[3].innerText == '')) {
                 return;
@@ -2084,40 +1817,21 @@ ${samu}`
             let data = '';
             let newData = '';
             let interval_envio = setInterval(() => {
-                if ((aba == 'Setores' && celulas[1].innerText != '' && celulas[2].innerText != '' && celulas[3].innerText != '' && celulas[4].innerText != '') || aba == 'Usuários' || (celulas[1].innerText != '' && celulas[2].innerText != '' && (celulas[3].innerText != '' || celulas[4].innerText != '') && celulas[5].innerText != '')) {
-                    clearInterval(interval_envio);
-                    const cads_gu = ['6734', '2958', 'C', 'PAR'];
-                    const cads_tipo = ['norte', 'sul', 'centro', 'especializadas'];
-                    let cad = '';
-                    for (let index = 0; index < cads_gu.length; index++) {
-                        if (cads_gu[index].includes(celulas[1].innerText.substring(0, 1))) {
-                            cad = cads_tipo[index];
-                        }
-                    }
-
-
-
-                    if (aba == 'Rotinas') {
-                        data = new Date(celulas[5].innerText.split(',')[0].split('/')[2], parseInt(celulas[5].innerText.split('/')[1]) - 1, celulas[5].innerText.split('/')[0]);
-
-                        if (celulas[0].getAttribute('dados')?.includes('-()--()--()--()--()-_QRA_-()-_QTR_INICIAL_-()-_QRU_-()-_QTR_FINAL_-()--()-')) {
-                            newData = `${celulas[0].parentNode.getAttribute('name')}-()-${celulas[3].innerText.trim() + '-()--()--()-' + celulas[4].innerText.trim() + '-()-'}-()-${celulas[1].innerText.trim()}-()-${celulas[5].innerText.trim()}-()-${celulas[2].innerText.trim()}-()-${celulas[6].innerText.trim()}-()--()--()-${celulas[7].innerText.trim()}-++-`;
-                        } else if (celulas[0].getAttribute('dados')?.includes('-()-_QRA_-()-_QTR_INICIAL_-()-_QRU_-()-_QTR_FINAL_-()-')) {
-                            newData = celulas[0].parentNode.getAttribute('name') + '-()-' + celulas[0].getAttribute('dados').replace('_QRA_', celulas[1].innerText.trim()).replace('_QTR_INICIAL_', celulas[5].innerText.trim()).replace('_QRU_', celulas[2].innerText.trim()).replace('_QTR_FINAL_', celulas[6].innerText.trim()) + '-()-' + celulas[7].innerText.trim() + '-++-';
-                        } else {
-                            newData = `${celulas[0].parentNode.getAttribute('name')}-()-${celulas[0].getAttribute('dados') || (celulas[3].innerText.trim() + '-()--()--()-' + celulas[4].innerText.trim() + '-()-')}-()-${celulas[1].innerText.trim()}-()-${celulas[5].innerText.trim()}-()-${celulas[2].innerText.trim()}-()-${celulas[6].innerText.trim()}-()--()--()-${celulas[7].innerText.trim()}-++-`;
-                        }
-                    } else if (aba == 'Chamadas') {
-                        data = new Date(new Date(parseInt(td.parentNode.getAttribute('name').split('-**-')[1])).getFullYear(), new Date(parseInt(td.parentNode.getAttribute('name').split('-**-')[1])).getMonth(), new Date(parseInt(td.parentNode.getAttribute('name').split('-**-')[1])).getDate());
-                        newData = `${td.parentNode.getAttribute('name')}-()-${celulas[1].innerText.trim()}-()-${celulas[2].innerText.trim()}-()-${celulas[3].innerText.trim()}-()-${celulas[4].innerText.trim()}-()-${celulas[5].innerText.trim() || ''}-()-${celulas[6].innerText.trim() || ''}-()-${celulas[7].innerText.trim() || ''}-()-${celulas[8].innerText.trim() || ''}-()-${celulas[9].innerText.trim()}-++-`;
+                if ((aba == 'Áreas' && celulas[1].innerText != '') || (aba == 'Setores' && celulas[1].innerText != '' && celulas[2].innerText != '' && celulas[3].innerText != '') || aba == 'Usuários' || (celulas[1].innerText != '' && celulas[2].innerText != '' && (celulas[3].innerText != '' || celulas[4].innerText != '') && celulas[5].innerText != '')) {
+                    if (aba == 'Minhas Missões') {
+                        data = new Date(celulas[1].innerText.split(',')[0].split('/')[2], parseInt(celulas[1].innerText.split('/')[1]) - 1, celulas[1].innerText.split('/')[0]);
+                        newData = `${celulas[0].parentNode.getAttribute('name')}-()-${celulas[1].innerText.trim()}-()-${celulas[2].innerText.trim()}-()-${celulas[3].innerText.trim()}-()-${celulas[4].innerText.trim()}-()-${celulas[5].innerText.trim()}-()-${celulas[6].innerText.trim()}-()-${celulas[7].innerText.trim()}-()-${celulas[8].innerText.trim()}-()-${celulas[9].innerText.trim()}-++-`;
+                    } else if (aba == 'Áreas') {
+                        data = 'area';
+                        newData = `${celulas[1].innerText.trim()}-`;
                     } else if (aba == 'Setores') {
                         data = new Date(new Date(parseInt(td.parentNode.getAttribute('name'))).getFullYear(), new Date(parseInt(td.parentNode.getAttribute('name'))).getMonth(), new Date(parseInt(td.parentNode.getAttribute('name'))).getDate());
-                        newData = `${td.parentNode.getAttribute('name')}-()-${celulas[1].innerText.trim()}-()-${celulas[3].innerText.trim()}-()-${celulas[5].innerText.trim()}-()-${celulas[2].innerText.trim()}-()-${celulas[4].innerText.trim() || ''}-++-`;
+                        newData = `${td.parentNode.getAttribute('name')}-()-${celulas[1].innerText.trim()}-()-${celulas[2].innerText.trim()}-()-${celulas[3].innerText.trim()}-++-`;
                     } else if (aba == 'Usuários') {
                         data = celulas[1].innerText.trim();
                         let senha = '';
-                        if (celulas[4].innerText != '' && celulas[4].innerText != '\n') {
-                            senha = celulas[4].innerText
+                        if (celulas[5].innerText != '' && celulas[5].innerText != '\n') {
+                            senha = celulas[5].innerText
                         } else {
                             senha = CryptoJS.SHA256('12345').toString();
                         }
@@ -2127,11 +1841,12 @@ ${samu}`
                             const novoUsuario = {
                                 nome: celulas[2].innerText.trim(),
                                 criado_em: firebase.firestore.FieldValue.serverTimestamp(),
-                                credencial: celulas[3].innerText.trim()
+                                credencial: celulas[3].innerText.trim(),
+                                areas: celulas[4].innerText.trim(),
                             };
 
                             // Só define a senha se o documento ainda não existir
-                            if (!doc.exists || celulas[4].innerText == '' || celulas[4].innerText == '\n') {
+                            if (!doc.exists || celulas[5].innerText == '' || celulas[5].innerText == '\n') {
                                 novoUsuario.senha = senha;
                             }
 
@@ -2147,8 +1862,10 @@ ${samu}`
                     let ja_enviado = sessionStorage.getItem('ja_enviado' + aba) || '';
                     if (!ja_enviado.includes(newData)) {
                         let docRef = '';
-                        if (aba == 'Rotinas' || aba == 'Chamadas') {
-                            docRef = db.collection(aba.toLowerCase()).doc(data.toISOString());
+                        if (aba == 'Minhas Missões') {
+                            docRef = db.collection('minhas_missoes').doc(data.toISOString());
+                        } else if (aba == 'Áreas') {
+                            docRef = db.collection('dados_fixos').doc('area');
                         } else {
                             docRef = db.collection('dados_fixos').doc('qth');
                         }
@@ -2158,10 +1875,10 @@ ${samu}`
                                 // Documento existe, vamos pegar os dados antigos
                                 let existingData = docSnapshot.data();
                                 if (!JSON.stringify(existingData).includes(td.parentNode.getAttribute('name'))) {
-                                    if (aba == 'Rotinas') {
-                                        existingData[cad] += newData;
-                                    } else if (aba == 'Chamadas') {
-                                        existingData['chamadas'] += newData;
+                                    if (aba == 'Minhas Missões') {
+                                        existingData[celulas[3].innerText] += newData;
+                                    } else if (aba == 'Áreas') {
+                                        existingData['area'] += newData;
                                     } else if (aba == 'Setores') {
                                         existingData['qth'] += newData;
                                     }
@@ -2169,10 +1886,10 @@ ${samu}`
                                 } else {
                                     let dado_antigo = JSON.stringify(existingData).substring(JSON.stringify(existingData).indexOf(td.parentNode.getAttribute('name'),)).substring(0, JSON.stringify(existingData).substring(JSON.stringify(existingData).indexOf(td.parentNode.getAttribute('name'),)).indexOf('-++-') + 4);
                                     existingData = JSON.parse(JSON.stringify(existingData).replaceAll(dado_antigo, ''));
-                                    if (aba == 'Rotinas') {
-                                        existingData[cad] += newData;
-                                    } else if (aba == 'Chamadas') {
-                                        existingData['chamadas'] += newData;
+                                    if (aba == 'Minhas Missões') {
+                                        existingData[celulas[3].innerText] += newData;
+                                    } else if (aba == 'Áreas') {
+                                        existingData['area'] += newData;
                                     } else if (aba == 'Setores') {
                                         existingData['qth'] += newData;
                                     }
@@ -2182,29 +1899,32 @@ ${samu}`
                                 docRef.set({ ...existingData })
                                     .then(() => {
                                         clearInterval(interval_envio);
-                                        if (aba == 'Rotinas') {
-                                            fecha_ultimo_horario(celulas);
-                                        }
                                     })
                                     .catch((error) => { console.error("Erro ao atualizar o documento:", error); clearInterval(interval_envio) });
 
                             } else {
                                 let dados = '';
-                                if (aba == 'Rotinas') {
+                                if (aba == 'Minhas Missões') {
                                     dados = {
-                                        'norte': '',
-                                        'sul': '',
-                                        'centro': '',
-                                        'especializadas': ''
+                                        'Área 1': '',
+                                        'Área 2': '',
+                                        'Área 3': '',
+                                        'Área 4': '',
+                                        'Área 5': '',
+                                        'Área 6': '',
+                                        'Área 7': '',
+                                        'Área 8': '',
+                                        'Área 9': '',
+                                        'Área 10': '',
                                     }
-                                    dados[cad] = newData;
-                                } else if (aba == 'Chamadas') {
-                                    dados = { 'chamadas': newData };
+                                    dados[celulas[3].innerText] = newData;
+                                } else if (aba == 'Áreas') {
+                                    dados = { 'area': newData };
                                 }
                                 sessionStorage.setItem('ja_enviado' + aba, JSON.stringify(dados));
                                 // Documento não existe, apenas cria com os novos dados
                                 docRef.set(dados)
-                                    .then(() => { clearInterval(interval_envio); fecha_ultimo_horario(celulas) })
+                                    .then(() => { clearInterval(interval_envio) })
                                     .catch((error) => { console.error("Erro ao criar o documento:", error); clearInterval(interval_envio) });
                             }
                         });
@@ -2212,40 +1932,6 @@ ${samu}`
                 }
             }, 100);
 
-        }
-
-        function fecha_ultimo_horario(celulas) {
-            let hora = new Date().toLocaleString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false, // usa o formato 24h
-            });
-            // Filtra as rotinas da GU que ainda não têm um horário final (td[6] vazio)
-            let rotinas_da_gu = Array.from(document.querySelectorAll('tr')).filter(linha => {
-                return linha.innerText.includes(celulas[1].innerText) && linha.querySelectorAll('td')[6].innerText == '';
-            });
-
-            // Certifique-se de que temos pelo menos duas rotinas
-            if (rotinas_da_gu.length >= 2) {
-                const penultima_rotina = rotinas_da_gu[rotinas_da_gu.length - 2];
-
-                if (penultima_rotina) {
-                    const tdFinal = penultima_rotina.querySelectorAll('td')[6];
-
-                    // Verifica se o td[6] está vazio antes de atribuir a hora
-                    if (tdFinal && tdFinal.innerText.trim() === '') {
-                        tdFinal.innerText = hora;
-
-                        // Chama a função de envio de dados, se necessário
-                        enviar_dados(tdFinal);
-                    } else {
-                        console.error("Erro: Não foi possível atualizar o horário final.");
-                    }
-                }
-            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -2256,8 +1942,8 @@ ${samu}`
                 toggle.textContent = "☀️";
             }
             if (localStorage.getItem("ordem_tabelas")) {
-                document.querySelector('#rotinas_table thead').innerHTML = localStorage.getItem('ordem_tabelas').split('-()-')[0];
-                document.querySelector('#chamadas_table thead').innerHTML = localStorage.getItem('ordem_tabelas').split('-()-')[1];
+                document.querySelector('#minhas_missoes_table thead').innerHTML = localStorage.getItem('ordem_tabelas').split('-()-')[0];
+                document.querySelector('#areas_table thead').innerHTML = localStorage.getItem('ordem_tabelas').split('-()-')[1];
             }
 
             toggle.addEventListener("click", () => {
@@ -2268,39 +1954,47 @@ ${samu}`
             });
 
 
-            const filtro_rotinas = localStorage.getItem('filtro_rotinas');
-            if (filtro_rotinas) {
-                document.querySelector('#rotina_data_inicial').value = filtro_rotinas.split('-()-')[0];
-                document.querySelector('#rotina_data_final').value = filtro_rotinas.split('-()-')[1];
-                document.querySelector('#rotina_checkbox_norte').checked = filtro_rotinas.split('-()-')[2] === 'true';
-                document.querySelector('#rotina_checkbox_sul').checked = filtro_rotinas.split('-()-')[3] === 'true';
-                document.querySelector('#rotina_checkbox_centro').checked = filtro_rotinas.split('-()-')[4] === 'true';
-                document.querySelector('#rotina_checkbox_especializadas').checked = filtro_rotinas.split('-()-')[5] === 'true';
 
-            }
-            const filtro_chamadas = localStorage.getItem('filtro_chamadas');
-            if (filtro_chamadas) {
-                document.querySelector('#chamadas_data_inicial').value = filtro_chamadas.split('-()-')[0];
-                document.querySelector('#chamadas_data_final').value = filtro_chamadas.split('-()-')[1];
-
-            }
             let interval_logado = setInterval(() => {
                 if (sessionStorage.getItem('usuario_logado')) {
+                    baixa_banco();
                     if (JSON.parse(sessionStorage.getItem('usuario_logado')).credencial == '3') {
-                        document.querySelector('#aba_usuários').style.display = '';
+                        document.querySelectorAll('button.tab-button')[1].style.display = '';
+                        document.querySelectorAll('button.tab-button')[2].style.display = '';
+                        document.querySelectorAll('button.tab-button')[3].style.display = '';
                     }
-                    document.querySelectorAll("#rotinas_table tbody tr,#chamadas_table tbody tr,#setores_table tbody tr").forEach(tr => {
+                    if (JSON.parse(sessionStorage.getItem('usuario_logado')).areas == 'Todas') {
+                        let options = `<option value="Todas">Todas</option>`;
+                        JSON.parse(localStorage.getItem('area')).area.split('-').forEach(area => {
+                            options += `<option value="${area}">${area}</option>`;
+                        })
+                        document.querySelector('#minhas_missoes_select_area').innerHTML += options;
+                    } else {
+                        let options = '';
+                        JSON.parse(sessionStorage.getItem('usuario_logado')).areas.split('-').forEach(area => {
+                            options += `<option value="${area}">${area}</option>`;
+                        })
+                        document.querySelector('#minhas_missoes_select_area').innerHTML += options;
+                    }
+                    const filtro_minhas_missoes = localStorage.getItem('filtro_minhas_missoes');
+                    if (filtro_minhas_missoes) {
+                        document.querySelector('#minhas_missoes_data_inicial').value = filtro_minhas_missoes.split('-()-')[0];
+                        document.querySelector('#minhas_missoes_data_final').value = filtro_minhas_missoes.split('-()-')[1];
+                        document.querySelector('#minhas_missoes_select_area').value = filtro_minhas_missoes.split('-()-')[2];
+                    }
+                    document.querySelectorAll("#minhas_missoes_table tbody tr,#areas_table tbody tr,#setores_table tbody tr").forEach(tr => {
                         tr.setAttribute('name', JSON.parse(sessionStorage.getItem('usuario_logado')).nome + '-**-' + new Date().getTime());
                     });
                     clearInterval(interval_logado);
-                    filtrar_dados('rotinas');
-                    filtrar_dados('chamadas');
-                    baixa_banco();
+                    filtrar_dados('minhas_missoes');
+                    filtrar_dados('areas');
+
                     if (localStorage.getItem('config_abas')) {
-                        Array.from(document.querySelectorAll('button[class="tab-button"]')).filter(button => button.innerText == localStorage.getItem('config_abas'))[0].click();
+                        Array.from(document.querySelectorAll('button[class*="tab-button"]')).filter(button => button.innerText == localStorage.getItem('config_abas'))[0].click();
                     }
                 }
             }, 100);
+
             document.querySelectorAll('th.sortable').forEach(th => {
                 th.addEventListener('click', () => {
                     // Remove classes anteriores
@@ -2333,7 +2027,7 @@ ${samu}`
                     linhas = linhas.map((l) => l.split('-&&-')[1]).forEach(l => {
                         th.closest('table').querySelector('tbody tr:last-child').insertAdjacentHTML('beforebegin', l);
                     });
-                    localStorage.setItem('ordem_tabelas', document.querySelector('#rotinas_table thead').innerHTML + '-()-' + document.querySelector('#chamadas_table thead').innerHTML);
+                    localStorage.setItem('ordem_tabelas', document.querySelector('#minhas_missoes_table thead').innerHTML + '-()-' + document.querySelector('#areas_table thead').innerHTML);
                 });
             });
 
@@ -2343,46 +2037,6 @@ ${samu}`
             }
 
         });
-
-        function empenhar_gu(demanda) {
-            let dados = demanda.closest('tr').querySelectorAll('td');
-            let id = JSON.parse(sessionStorage.getItem('usuario_logado')).nome + '-**-' + new Date().getTime();
-            let endereco = dados[5].innerText.trim();
-            let qths = localStorage.getItem('qth').split('-++-')
-            let qth = 'DEM ';
-            let tipo_local = 'Residência';
-            qths.forEach(item => {
-                if (endereco == item.split('-()-')[1]?.trim()) {
-                    qth += item.split('-()-')[1].trim();
-                    endereco = item.split('-()-')[4].trim();
-                    tipo_local = item.split('-()-')[2].trim();
-                }
-            });
-            let narrativa = dados[3].innerText;
-            let natureza = dados[4].innerText;
-            let telefone = dados[2].innerText;
-            let solicitante = dados[1].innerText;
-            if (qth == 'DEM ') {
-                qth += natureza;
-            }
-            let dados_demanda = `${qth}-()-${tipo_local}-()-${narrativa}-()-${endereco}-()-${natureza}-()-_QRA_-()-_QTR_INICIAL_-()-_QRU_-()-_QTR_FINAL_-()-${telefone}-()-${solicitante}-++-`;
-            document.querySelector('button[class="tab-button"]').click();
-            let linha = criar_linha('rotinas', [id, qth, tipo_local, narrativa, endereco, natureza, '', new Date().toLocaleString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false, // usa o formato 24h
-            }), '', '', telefone, solicitante]);
-            document.querySelector('#rotinas_table tbody tr:last-child').insertAdjacentHTML('beforeBegin', linha);
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
-            document.querySelector('#rotinas_table tbody tr:last-child').previousElementSibling.querySelectorAll('td')[1].focus();
-        }
-
 
         function turno_atual(button) {
             const hora = new Date().getHours();
@@ -2436,12 +2090,12 @@ ${samu}`
                 }
             };
 
-            if (aba === 'Rotinas' && celulas[5]?.innerText.includes('/')) {
+            if (aba === 'minhas_missoes' && celulas[5]?.innerText.includes('/')) {
                 const [dia, mes, anoRaw] = celulas[5].innerText.split('/');
                 const ano = anoRaw.split(',')[0];
                 const data = new Date(ano, parseInt(mes) - 1, parseInt(dia));
                 await atualizarFirestore(aba.toLowerCase(), data.toISOString());
-            } else if (aba === 'Chamadas') {
+            } else if (aba === 'areas') {
                 const timestamp = parseInt(id.split('-**-')[1]);
                 const data = new Date(new Date(timestamp).toDateString()); // normaliza para YYYY-MM-DD
                 await atualizarFirestore(aba.toLowerCase(), data.toISOString());
@@ -2462,7 +2116,7 @@ ${samu}`
         function copiar_selecionados() {
             let texto = '';
             let copiados = localStorage.getItem('copiados') || '';
-            document.querySelectorAll('#rotinas_table tbody tr').forEach(tr => {
+            document.querySelectorAll('#minhas_missoes_table tbody tr').forEach(tr => {
                 if (tr.querySelector('input[type=checkbox]').checked == true) {
                     tr.querySelector('svg').setAttribute('class', 'copiar_clicado');
                     copiados += tr.getAttribute('name');
@@ -2484,7 +2138,7 @@ ${samu}`
             msg.style.zIndex = '9999'; // ← garante que fique por cima
 
             // Garante que o SVG possa conter o elemento
-            const wrapper = document.querySelector('#rotinas_table thead span');
+            const wrapper = document.querySelector('#minhas_missoes_table thead span');
             wrapper.style.position = 'relative';
             wrapper.appendChild(msg);
 
@@ -2503,10 +2157,10 @@ ${samu}`
 
             const linhasSelecionadas = Array.from(tabela.querySelectorAll('tbody tr')).filter(tr => {
                 const checkbox = tr.querySelector('input[type=checkbox]');
-                if (aba === 'rotinas') {
+                if (aba === 'minhas_missoes') {
                     const data_inicial = tr.querySelectorAll('td')[5].innerText;
                     return checkbox && checkbox.checked && data_inicial != '';
-                } else if (aba === 'chamadas') {
+                } else if (aba === 'areas') {
                     const qtr = tr.querySelectorAll('td')[9].innerText;
                     return checkbox && checkbox.checked && qtr != '';
                 }
@@ -2524,11 +2178,11 @@ ${samu}`
                 const celulas = tr.querySelectorAll('td');
                 let docId = '';
 
-                if (aba === 'rotinas' && celulas[5]?.innerText.includes('/')) {
+                if (aba === 'minhas_missoes' && celulas[5]?.innerText.includes('/')) {
                     const [d, m, yRaw] = celulas[5].innerText.split('/');
                     const y = yRaw.split(',')[0];
                     docId = new Date(y, parseInt(m) - 1, parseInt(d)).toISOString();
-                } else if (aba === 'chamadas') {
+                } else if (aba === 'areas') {
                     const timestamp = parseInt(id);
                     docId = new Date(new Date(timestamp).toDateString()).toISOString();
                 } else {
