@@ -226,12 +226,96 @@
         body:not(.dark-mode) #usuários_table th {
             position: sticky;
             top: 0;
-            z-index: 2;
+            z-index: 1000;
             border-top: 5px;
             /* ou maior se tiver sombras */
             background-color: #f0f0f0;
             font-weight: bold;
 
+        }
+
+        /* Fundo escuro semi-transparente */
+        body:not(.dark-mode) .modal {
+            display: none;
+            /* Escondido por padrão */
+            position: fixed;
+            /* Fica sobre toda a tela */
+            z-index: 1000;
+            /* Sobre outros elementos */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* Scroll se o conteúdo for grande */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Fundo semi-transparente */
+        }
+
+        /* Caixa do conteúdo */
+        body:not(.dark-mode) .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            /* 10% do topo, centralizado horizontalmente */
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            /* Largura do modal */
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Botão de fechar (X) */
+        body:not(.dark-mode) .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        body:not(.dark-mode) .close:hover,
+        body:not(.dark-mode) .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Container de botões no rodapé */
+        body:not(.dark-mode) .botoes_rodape {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Botão Cancelar */
+        body:not(.dark-mode) .botoes_rodape_cancelar {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        body:not(.dark-mode) .botoes_rodape_cancelar:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Botão Confirmar */
+        body:not(.dark-mode) .botoes_rodape_confirmar {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        body:not(.dark-mode) .botoes_rodape_confirmar:hover {
+            background-color: #0056b3;
         }
 
         body.dark-mode #minhas_missoes_table th,
@@ -1011,7 +1095,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><svg class="borracha" onclick="excluir_linha(this,false)" xmlns="http://www.w3.org/2000/svg"
+                        <td>
+                            <svg class="borracha" onclick="excluir_linha(this,false)" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="17px" height="17px"
                                 viewBox="0 0 15 15" version="1.1">
                                 <g id="surface1">
@@ -1020,11 +1105,13 @@
                                     <path style=" stroke:none;fill-rule:nonzero;fill-opacity:1;"
                                         d="M 12.835938 4.925781 L 9.117188 1.214844 C 8.941406 1.039062 8.703125 0.9375 8.453125 0.9375 C 8.207031 0.9375 7.964844 1.039062 7.789062 1.214844 L 1.226562 7.777344 C 1.050781 7.953125 0.953125 8.191406 0.953125 8.441406 C 0.953125 8.6875 1.050781 8.925781 1.226562 9.101562 L 3.34375 11.25 L 7.835938 11.25 L 12.835938 6.253906 C 13.011719 6.078125 13.109375 5.839844 13.109375 5.589844 C 13.109375 5.339844 13.011719 5.101562 12.835938 4.925781 Z M 7.449219 10.3125 L 3.75 10.3125 L 1.875 8.4375 L 4.832031 5.480469 L 8.550781 9.191406 Z M 9.210938 8.550781 L 5.5 4.832031 L 8.4375 1.875 L 12.1875 5.59375 Z M 9.210938 8.550781 " />
                                 </g>
-                            </svg></td>
+                            </svg>
+                        </td>
                         <td contenteditable="true" oninput="filterOptions(this,2)" onblur="enviar_dados(this)"></td>
                         <td contenteditable="true" oninput="filterOptions(this,2)" onblur="enviar_dados(this)"></td>
                         <td contenteditable="true" oninput="filterOptions(this,2)" onblur="enviar_dados(this)"></td>
-                        <td contenteditable="true" oninput="filterOptions(this,0)" onblur="enviar_dados(this)"></td>
+                        <td contenteditable="true" onclick="selecionarAreas(this)" onblur="enviar_dados(this)"></td>
+                        <td contenteditable="true" onblur="enviar_dados(this)"></td>
                     </tr>
                 </tbody>
             </table>
@@ -1033,16 +1120,31 @@
         <ul id="options-list"></ul>
     </div>
     </div>
+
+
+
+    <!-- Estrutura do modal -->
+    <div id="modal_areas" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fechar_modal()">&times;</span>
+            <h2>Áreas</h2>
+            <p>Selecione as áreas que o usuário enxergará no sistema:</p>
+            <div id="opcoes_areas"></div>
+            <div class="botoes_rodape"><button class="botoes_rodape_cancelar"
+                    onclick="fechar_modal()">Cancelar</button><button class="botoes_rodape_confirmar"
+                    onclick="confirmar_modal()">Confirmar</button></div>
+        </div>
+    </div>
     <script>
         // Configuração Firebase
         const firebaseConfig = {
-    apiKey: "AIzaSyBW354Qx2cCs9tCF8H7tQ5T0sxQjYy9WV0",
-    authDomain: "pmt-gravatai.firebaseapp.com",
-    projectId: "pmt-gravatai",
-    storageBucket: "pmt-gravatai.firebasestorage.app",
-    messagingSenderId: "816578695763",
-    appId: "1:816578695763:web:577fbf4293b32cb7c36ca6"
-  };
+            apiKey: "AIzaSyBW354Qx2cCs9tCF8H7tQ5T0sxQjYy9WV0",
+            authDomain: "pmt-gravatai.firebaseapp.com",
+            projectId: "pmt-gravatai",
+            storageBucket: "pmt-gravatai.firebasestorage.app",
+            messagingSenderId: "816578695763",
+            appId: "1:816578695763:web:577fbf4293b32cb7c36ca6"
+        };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
@@ -1347,7 +1449,7 @@
                     <td oninput="filterOptions(this,3)" onblur="enviar_dados(this)" contenteditable="${content_editable}">
                         ${dados[2]}
                     </td>
-                    <td oninput="filterOptions(this,3)" onblur="enviar_dados(this)" contenteditable="${content_editable}">
+                    <td oninput="filterOptions(this,3)" onfocus="selecionarAreas(this)" onblur="enviar_dados(this)" contenteditable="${content_editable}">
                         ${dados[3]}
                     </td>
                     <td oninput="filterOptions(this,3)" onblur="enviar_dados(this)" contenteditable="${content_editable}">
@@ -1585,7 +1687,7 @@
                     if (aba != 'usuários') {
                         document.querySelector(`#${document.querySelector('button[class="tab-button ativo"]').innerText.toLowerCase().replaceAll(' ', '_').replaceAll('õ', 'o').replaceAll('á', 'a')}_table tbody`).insertAdjacentHTML('beforeend', criar_linha(aba, [JSON.parse(sessionStorage.getItem('usuario_logado')).nome + '-**-' + new Date().getTime(), '', '', '', '', '', '', '', '', '', '', '']));
                     } else {
-                        document.querySelector(`#${document.querySelector('button[class="tab-button ativo"]').innerText.toLowerCase()}_table tbody`).insertAdjacentHTML('beforeend', criar_linha(aba, ['', '', '', '', '']));
+                        document.querySelector(`#${document.querySelector('button[class="tab-button ativo"]').innerText.toLowerCase()}_table tbody`).insertAdjacentHTML('beforeend', criar_linha(aba, ['', '', '', '', '', '', '']));
                     }
 
                     td.focus();
@@ -1826,6 +1928,7 @@ ${samu}`
                         data = new Date(new Date(parseInt(td.parentNode.getAttribute('name'))).getFullYear(), new Date(parseInt(td.parentNode.getAttribute('name'))).getMonth(), new Date(parseInt(td.parentNode.getAttribute('name'))).getDate());
                         newData = `${td.parentNode.getAttribute('name')}-()-${celulas[1].innerText.trim()}-()-${celulas[2].innerText.trim()}-()-${celulas[3].innerText.trim()}-++-`;
                     } else if (aba == 'Usuários') {
+                        clearInterval(interval_envio);
                         data = celulas[1].innerText.trim();
                         let senha = '';
                         if (celulas[5].innerText != '' && celulas[5].innerText != '\n') {
@@ -1851,6 +1954,7 @@ ${samu}`
                             userRef.set(novoUsuario, { merge: true }) // 'merge' evita sobrescrever campos não especificados
                                 .then(() => {
                                     console.log('Usuário salvo com sucesso.');
+
                                 })
                                 .catch((error) => {
                                     console.error('Erro ao salvar usuário:', error);
@@ -2067,7 +2171,13 @@ ${samu}`
                 const docRef = db.collection(colecao).doc(docId);
                 const snapshot = await docRef.get();
                 if (!snapshot.exists) return removerLinhaVisual();
-
+                if (colecao == 'users') {
+                    docRef.delete().then(() => {
+                        return removerLinhaVisual();
+                    }).catch((error) => {
+                        console.error("Erro ao remover o usuário: ", error);
+                    });
+                }
                 const dados = snapshot.data();
                 const dadosStr = JSON.stringify(dados);
 
@@ -2087,18 +2197,19 @@ ${samu}`
                     console.error("Erro ao atualizar Firestore:", e);
                 }
             };
-
-            if (aba === 'minhas_missoes' && celulas[5]?.innerText.includes('/')) {
+            if (aba === 'Minhas Missões' && celulas[5]?.innerText.includes('/')) {
                 const [dia, mes, anoRaw] = celulas[5].innerText.split('/');
                 const ano = anoRaw.split(',')[0];
                 const data = new Date(ano, parseInt(mes) - 1, parseInt(dia));
-                await atualizarFirestore(aba.toLowerCase(), data.toISOString());
-            } else if (aba === 'areas') {
+                await atualizarFirestore('minhas_missoes', data.toISOString());
+            } else if (aba === 'Áreas') {
                 const timestamp = parseInt(id.split('-**-')[1]);
                 const data = new Date(new Date(timestamp).toDateString()); // normaliza para YYYY-MM-DD
                 await atualizarFirestore(aba.toLowerCase(), data.toISOString());
             } else if (aba === 'Setores') {
                 await atualizarFirestore('dados_fixos', 'qth');
+            } else if (aba === 'Usuários') {
+                await atualizarFirestore('users', celulas[1].innerText);
             } else {
                 celulas[1]?.focus();
                 celulas[1]?.blur();
@@ -2224,6 +2335,43 @@ ${samu}`
 
             await Promise.all(promises);
             document.querySelector(`#${aba}_table label[class="checkbox-wrapper"]`).click();
+        }
+
+        function selecionarAreas(celula) {
+            const modal = document.querySelector('#modal_areas');
+            modal.style.display = 'block';
+            const opcoes_areas = document.querySelector('#opcoes_areas');
+            const areas = JSON.parse(localStorage.getItem('area')).area;
+            opcoes_areas.innerHTML = `<label id="input_selecionar_todas" style="user-select:none"><input type=checkbox ${celula.innerText.includes('Todas') ? 'checked' : ''} name="Todas" /> Todas</label><br>`;
+            if (areas) {
+                areas.split('-').forEach((area) => {
+                    if (area != '') {
+                        opcoes_areas.innerHTML += `<label  style="user-select:none"><input type=checkbox ${celula.innerText.includes(area) || celula.innerText.includes('Todas') ? 'checked' : ''} name="${area}" /> ${area}</label><br>`;
+                    }
+                })
+            }
+
+            opcoes_areas.querySelector('#input_selecionar_todas').addEventListener('click', function () {
+                for (let index = 1; index < opcoes_areas.querySelectorAll('input').length; index++) {
+                    opcoes_areas.querySelectorAll('input')[index].checked = opcoes_areas.querySelector('input').checked;
+                }
+            });
+
+            document.querySelector('div.botoes_rodape').innerHTML = '<button onclick="fechar_modal()" class="botoes_rodape_cancelar">Cancelar</button><button class="botoes_rodape_confirmar">Confirmar</button>';
+            document.querySelector('button.botoes_rodape_confirmar').addEventListener('click', function () {
+                if (opcoes_areas.querySelector('input').checked) {
+                    celula.innerText = 'Todas';
+                } else {
+                    const selecionados = Array.from(opcoes_areas.querySelectorAll('input:checked')).map(checkbox => checkbox.name).join('-');
+                    celula.innerText = selecionados;
+                    enviar_dados(celula);
+                    modal.style.display = 'none';
+                }
+            })
+        }
+
+        function fechar_modal() {
+            document.querySelector('#modal_areas').style.display = 'none';
         }
 
 
