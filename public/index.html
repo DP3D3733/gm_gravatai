@@ -2364,9 +2364,9 @@ ${samu}`
                 } else {
                     const selecionados = Array.from(opcoes_areas.querySelectorAll('input:checked')).map(checkbox => checkbox.name).join('-');
                     celula.innerText = selecionados;
-                    enviar_dados(celula);
-                    modal.style.display = 'none';
                 }
+                enviar_dados(celula);
+                modal.style.display = 'none';
             })
         }
 
